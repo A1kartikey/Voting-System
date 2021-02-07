@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Vali Admin - Free Bootstrap 4 Admin Template</title>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Main CSS-->
+    <link rel="stylesheet" type="text/css" href="css/main.css" />
+    <!-- Font-icon css-->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <style type="text/css">
+      .info {
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body class="app sidebar-mini">
+    <!-- Navbar-->
+    <header class="app-header">
+      <a class="app-header__logo" href="index.html">E-Voting</a>
+      <!-- Sidebar toggle button--><a
+        class="app-sidebar__toggle"
+        href="javascript:void(0)"
+        data-toggle="sidebar"
+        aria-label="Hide Sidebar"
+      ></a>
+      <!-- Navbar Right Menu-->
+      <ul class="app-nav">
+        <!-- User Menu-->
+        <li class="dropdown">
+          <a
+            class="app-nav__item"
+            href="javascript:void(0)"
+            data-toggle="dropdown"
+            aria-label="Open Profile Menu"
+            ><i class="fa fa-user fa-lg"></i> admin</a
+          >
+          <ul class="dropdown-menu settings-menu dropdown-menu-right">
+            <li>
+              <a class="dropdown-item" href="javascript:void(0)"
+                ><i class="fa fa-user fa-lg"></i> Profile</a
+              >
+            </li>
+            <li>
+              <a class="dropdown-item" href="javascript:void(0)"
+                ><i class="fa fa-sign-out fa-lg"></i> Logout</a
+              >
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </header>
+    <!-- Sidebar menu-->
+    <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
+    <aside class="app-sidebar">
+      <div class="app-sidebar__user">
+        <img
+          class="app-sidebar__user-avatar" width="50px"
+          src="https://icons.iconarchive.com/icons/iconarchive/blue-election/1024/Election-Polling-Box-icon.png"
+          alt="User Image"
+        />
+        <div>
+          <p class="app-sidebar__user-name">E-Voting System</p>
+        </div>
+      </div>
+      <ul class="app-menu">
+        <li>
+          <a
+            class="app-menu__item"
+            href="javascript:showTarget('getvotecount')"
+          >
+            <i class="app-menu__icon fa fa-star"></i>
+
+            <!-- <img style="width: 20px; background-color: #ffffff;" src="https://cdn4.iconfinder.com/data/icons/election-16/100/election_vote_voting-03-512.png"> -->
+            <span class="app-menu__label">GET VOTE COUNT</span></a
+          >
+        </li>
+
+        <li>
+          <a class="app-menu__item" href="javascript:showTarget('getvoterlist')"
+            ><i class="app-menu__icon fa fa-star"></i>
+            <span class="app-menu__label">GET VOTER LIST</span></a
+          >
+        </li>
+
+        <li>
+          <a
+            class="app-menu__item"
+            href="javascript:showTarget('getcandidatelist')"
+            ><i class="app-menu__icon fa fa-star"></i>
+            <span class="app-menu__label">GET CANDIDATE LIST</span></a
+          >
+        </li>
+      </ul>
+    </aside>
+    <main class="app-content">
+      <div class="row app-title vote-links d-flex justify-content-between">
+        <div class="col">
+          <h1><i class="fa fa-vote"></i> Voting System</h1>
+          <p>A free and open source Bootstrap 4 admin template</p>
+        </div>
+
+        <div class="col info" id="vote">
+          <img
+            style="width: 75px; padding: 0.75rem;"
+            src="data:image/png;base64,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"
+          />
+          <p>click Here to Vote</p>
+        </div>
+
+        <ul class="app-breadcrumb breadcrumb">
+          <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
+          <li class="breadcrumb-item"><a href="javascript:void(0)">Voting System</a></li>
+        </ul>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6 col-lg-3">
+          <div class="widget-small primary coloured-icon">
+            <!-- <i class="icon fa fa-users fa-3x"></i> -->
+            <img
+              style="width: 75px; padding: 0.75rem;"
+              src="https://cdn0.iconfinder.com/data/icons/politician-president-or-prime-minister-actions-fee/268/politician-action-008-512.png"
+            />
+            <div class="info" id="enrollcandidate">
+              <h4>Enroll Candidate</h4>
+              <!-- <p><b>5</b></p> -->
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-3">
+          <div class="widget-small warning coloured-icon">
+            <!-- <i class="icon fa fa-files-o fa-3x"></i> -->
+            <img
+              style="width: 75px; padding: 0.75rem;"
+              src="https://cdn4.iconfinder.com/data/icons/political-elections/50/19-512.png"
+            />
+            <div class="info" id="enrollvoter">
+              <h4>Enrole Voter</h4>
+              <!-- <p><b>10</b></p> -->
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-3">
+          <div class="widget-small danger coloured-icon">
+            <!-- <i class="icon fa fa-star fa-3x"></i> -->
+            <img
+              style="width: 75px; padding: 0.75rem;"
+              src="https://image.flaticon.com/icons/png/512/1642/1642772.png"
+            />
+            <div class="info" id="getvoterdetails">
+              <h4>get Voter Details</h4>
+              <!-- <p><b>500</b></p> -->
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-3">
+          <div class="widget-small danger coloured-icon">
+            <!-- <i class="icon fa fa-star fa-3x"></i> -->
+            <img
+              style="width: 75px; padding: 0.75rem;"
+              src="https://cdn0.iconfinder.com/data/icons/election-and-politics-2/68/Account_address_details_name_profile-512.png"
+            />
+            <div class="info" id="getcandidatedetails">
+              <h4>get Candidate Details</h4>
+              <!-- <p><b>500</b></p> -->
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row container-fluid" id="enrollcandidatediv">
+        <div class="tile col-md-12">
+          <div class="m-loader mr-4 spinner">
+            <svg class="m-circular" viewBox="25 25 50 50">
+              <circle
+                class="path"
+                cx="50"
+                cy="50"
+                r="20"
+                fill="none"
+                stroke-width="4"
+                stroke-miterlimit="10"
+              ></circle>
+            </svg>
+          </div>
+          <h3 class="tile-title d-flex justify-content-center">
+            Register Candidate
+          </h3>
+          <div class="tile-body">
+            <form class="form-horizontal">
+              <div class="form-group row">
+                <label class="control-label col-md-3">Voter Id</label>
+                <div class="col-md-8">
+                  <input
+                    class="form-control"
+                    type="text"
+                    id="ec_VoterId"
+                    placeholder="Enter Voter Id"
+                  />
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="control-label col-md-3">Name</label>
+                <div class="col-md-8">
+                  <input
+                    class="form-control"
+                    type="text"
+                    id="ec_VoterName"
+                    placeholder="Enter full name"
+                  />
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="control-label col-md-3">Age</label>
+                <div class="col-md-8">
+                  <input
+                    class="form-control col-md-8"
+                    type="number"
+                    id="ec_VoterAge"
+                    placeholder="Enter your Age"
+                  />
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="tile-footer">
+            <div class="row">
+              <div class="col-md-8 col-md-offset-3">
+                <button
+                  class="btn btn-primary"
+                  type="button"
+                  id="button_enrollCandidate"
+                >
+                  <i class="fa fa-fw fa-lg fa-check-circle"></i>Register</button
+                >&nbsp;&nbsp;&nbsp;<a class="btn btn-secondary" href="javascript:void(0)"
+                  ><i class="fa fa-fw fa-lg fa-times-circle"></i>Cancel</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row container-fluid" id="enrollvoterdiv">
+        <div class="tile col-md-12">
+          <div class="m-loader mr-4 spinner">
+            <svg class="m-circular" viewBox="25 25 50 50">
+              <circle
+                class="path"
+                cx="50"
+                cy="50"
+                r="20"
+                fill="none"
+                stroke-width="4"
+                stroke-miterlimit="10"
+              ></circle>
+            </svg>
+          </div>
+          <h3 class="tile-title">Register Voter</h3>
+          <div class="tile-body">
+            <form class="form-horizontal">
+              <div class="form-group row">
+                <label class="control-label col-md-3">Voter Id</label>
+                <div class="col-md-8">
+                  <input
+                    class="form-control"
+                    type="text"
+                    id="ev_VoterId"
+                    placeholder="Enter Voter Id"
+                  />
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="control-label col-md-3">Name</label>
+                <div class="col-md-8">
+                  <input
+                    class="form-control"
+                    type="text"
+                    id="ev_VoterName"
+                    placeholder="Enter full name"
+                  />
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="control-label col-md-3">Age</label>
+                <div class="col-md-8">
+                  <input
+                    class="form-control col-md-8"
+                    type="number"
+                    id="ev_VoterAge"
+                    placeholder="Enter your Age"
+                  />
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="tile-footer">
+            <div class="row">
+              <div class="col-md-8 col-md-offset-3">
+                <button
+                  class="btn btn-primary"
+                  type="button"
+                  id="button_enrollVoter"
+                >
+                  <i class="fa fa-fw fa-lg fa-check-circle"></i>Register</button
+                >&nbsp;&nbsp;&nbsp;<a class="btn btn-secondary" href="javascript:void(0)"
+                  ><i class="fa fa-fw fa-lg fa-times-circle"></i>Cancel</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row container-fluid" id="getvoterdetailsdiv">
+        <div class="tile col-md-6">
+          <h3 class="tile-title">Get Voter Details</h3>
+          <div class="tile-body">
+            <form class="form-horizontal">
+              <div class="form-group row">
+                <label class="control-label col-md-3">Voter Id</label>
+                <div class="col-md-8">
+                  <input
+                    class="form-control"
+                    type="text"
+                    placeholder="Enter Voter Id"
+                    id="gvd_VoterId"
+                  />
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="tile-footer">
+            <div class="row">
+              <div class="col-md-8 col-md-offset-3">
+                <button class="btn btn-primary" type="button" onclick="getVoterDetails()">
+                  <i class="fa fa-fw fa-lg fa-check-circle"></i>Submit</button
+                >&nbsp;&nbsp;&nbsp;<a class="btn btn-secondary" href="javascript:void(0)"
+                  ><i class="fa fa-fw fa-lg fa-times-circle"></i>Cancel</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="tile col-md-4 ml-2">
+          <h3 class="tile-title">Voter Details</h3>
+          <div class="tile-body">
+            <table class="table">
+              <thead>
+                <tr class="table-info">
+                  <th>Voter ID</th>
+                  <th>Name</th>
+                  <th>Age</th>
+                  <th>Voted</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="table-success" id="voterdetails">
+
+                </tr>
+              </tbody>
+              </table>
+          </div>
+        </div>
+      </div>
+      <div class="row container-fluid" id="getcandidatedetailsdiv">
+        <div class="tile col-md-6">
+          <h3 class="tile-title">Get Candidate Details</h3>
+          <div class="tile-body">
+            <form class="form-horizontal">
+              <div class="form-group row">
+                <label class="control-label col-md-3">Voter Id</label>
+                <div class="col-md-8">
+                  <input
+                    class="form-control"
+                    type="text"
+                    placeholder="Enter Voter Id"
+                    id="gcd_VoterId"
+                  />
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="tile-footer">
+            <div class="row">
+              <div class="col-md-8 col-md-offset-3">
+                <button class="btn btn-primary" type="button" onclick="getCandidateDetails()">
+                  <i class="fa fa-fw fa-lg fa-check-circle"></i>Submit</button
+                >&nbsp;&nbsp;&nbsp;<a class="btn btn-secondary" href="javascript:void(0)"
+                  ><i class="fa fa-fw fa-lg fa-times-circle"></i>Cancel</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="tile col-md-4 ml-2">
+          <h3 class="tile-title">Canidate Details</h3>
+          <div class="tile-body">
+            <table class="table">
+              <thead>
+                <tr class="table-info">
+                  <th>Voter ID</th>
+                  <th>Name</th>
+                  <th>Age</th>
+                  <th>Vote Count</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="table-success" id="candidatedetails">
+
+                </tr>
+              </tbody>
+              </table>
+          </div>
+        </div>
+      </div>
+      <div class="row container-fluid" id="votediv">
+        <div class="tile col-md-12">
+          <h3 class="tile-title d-flex justify-content-center">Vote Here</h3>
+          <div class="tile-body">
+            <form class="form-horizontal">
+              <div class="form-group row">
+                <label class="control-label col-md-3">Voter Id</label>
+                <div class="col-md-8">
+                  <input
+                    class="form-control"
+                    type="text"
+                    placeholder="Enter Voter Id"
+                    id="vote_VoterId"
+                  />
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="control-label col-md-3">Candidate Id</label>
+                <div class="col-md-8">
+                  <input
+                    class="form-control"
+                    type="text"
+                    placeholder="Enter Candidate Id"
+                    id="vote_CandiadteId"
+                  />
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="tile-footer">
+            <div class="row">
+              <div class="col-md-8 col-md-offset-3">
+                <button class="btn btn-primary" type="button" onclick="processVote()">
+                  <i class="fa fa-fw fa-lg fa-check-circle"></i>Submit</button
+                >&nbsp;&nbsp;&nbsp;<a class="btn btn-secondary" href="javascript:void(0)"
+                  ><i class="fa fa-fw fa-lg fa-times-circle"></i>Cancel</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row container-fluid" id="getvotecountdiv">
+        <div class="tile col-md-6">
+          <h3 class="tile-title">Get Vote Count</h3>
+          <div class="tile-body">
+            <form class="form-horizontal">
+              <div class="form-group row">
+                <label class="control-label col-md-3">Voter Id</label>
+                <div class="col-md-8">
+                  <input
+                    class="form-control"
+                    type="text"
+                    placeholder="Enter full name"
+                    id="gvc_CandiadteId"
+                  />
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="tile-footer">
+            <div class="row">
+              <div class="col-md-8 col-md-offset-3">
+                <button class="btn btn-primary" type="button" onclick="getVoteCount()">
+                  <i class="fa fa-fw fa-lg fa-check-circle"></i>Submit</button
+                >&nbsp;&nbsp;&nbsp;<a class="btn btn-secondary" href="javascript:void(0)"
+                  ><i class="fa fa-fw fa-lg fa-times-circle"></i>Cancel</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="tile col-md-4 ml-2">
+          <h3 class="tile-title">Vote Count</h3>
+          <div class="tile-body d-flex justify-content-center" >
+            <span style="font-family: fantasy;
+            font-size: xxx-large;" id="votecount"></span>
+          </div>
+        </div>
+      </div>
+      <div class="row container-fluid" id="getvoterlistdiv">
+        <div class="tile col-md-6">
+          <h3 class="tile-title">Get Voter List</h3>
+          <div class="tile-body">
+            <div class="bs-component">
+              <div class="list-group" id="listvoters">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row container-fluid" id="getcandidatelistdiv">
+        <div class="tile col-md-6">
+          <h3 class="tile-title">Get Candidate List</h3>
+          <div class="tile-body">
+            <div class="bs-component">
+              <div class="list-group" id="listcandidates">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <!-- Essential javascripts for application to work-->
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/main.js"></script>
+    <!-- The javascript plugin to display page loading on top-->
+    <script src="js/plugins/pace.min.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
